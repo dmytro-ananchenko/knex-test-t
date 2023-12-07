@@ -24,6 +24,14 @@ class LocationDAO {
       .where('id', '=', locationId);
       return locationItem;
   }
+
+  async getLocationByPersonId(personId: Number): Promise<Location> {
+    const locationItem = await db('location')
+      .first('location.*')
+      .join('person', 'location.id', 'person.location_id')
+      .where('person.id', '=', personId);
+    return locationItem;
+  }
 }
 
 export default new LocationDAO();

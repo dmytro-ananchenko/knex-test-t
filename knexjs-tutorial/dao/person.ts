@@ -3,11 +3,13 @@ import db from '../db/db';
 
 class PersonDAO {
   async createPerson(person: PersonInterface): Promise<Number> {
+    console.log(person);
     const [id] = await db('person')
       .insert({
         email: person.email,
         first_name: person.firstName,
         last_name: person.lastName,
+        location_id: person.locationId
       })
       .returning('id');
 

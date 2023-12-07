@@ -7,8 +7,6 @@ class PersonService {
     }
 
     updatePerson(personId: Number, person: PersonInterface) {
-        console.log(personId);
-        console.log(person);
         return personDAO.updatePerson(personId, person);
     }
 

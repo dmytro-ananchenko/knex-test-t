@@ -11,8 +11,12 @@ class LocationService {
       return locationDAO.getLocationList();
     }
 
-    getLocationById(personId: Number) {
-        return locationDAO.getLocationById(personId);
+    getLocationById(locationId: Number) {
+        return locationDAO.getLocationById(locationId);
+    }
+
+    getLocationByPersonId(personId: Number) {
+        return locationDAO.getLocationByPersonId(personId);
     }
 }
 

@@ -27,16 +27,14 @@ const personValidation = {
             .required()
             .error((err) =>
                 "wrong last name"
-        )
+        ),
+        locationId: Joi
+            .number()
+            .required()
     })
 }
-/*
-const parameterIdValidation = {
 
-}
-*/
 export {
     locationValidation,
-    personValidation,
-    // parameterIdValidation
+    personValidation
 }

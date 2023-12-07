@@ -23,6 +23,11 @@ locationRouter.get(
     locationController.getLocationById
 )
 
+locationRouter.get(
+    '/byPersonId/:personId',
+    locationController.getLocationByPersonId
+)
+
 locationRouter.all('*', (req, res) => {
     res.status(404);
 })

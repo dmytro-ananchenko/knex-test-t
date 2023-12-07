@@ -22,9 +22,21 @@ class LocationController {
   }
 
   async getLocationById(req: Request, res: Response) {
-    try {
-      const locationId = Number(req.query.id);
+    const locationId = Number(req.params.id);
+
+    try {  
       const locationItem = await locationService.getLocationById(locationId);
+      res.status(200).json(locationItem);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async getLocationByPersonId(req: Request, res: Response) {
+    const personId = Number(req.params.personId);
+    
+    try {
+      const locationItem = await locationService.getLocationByPersonId(personId);
       res.status(200).json(locationItem);
     } catch (err) {
       console.error(err);

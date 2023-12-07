@@ -1,8 +1,8 @@
 
 exports.up = function(knex) {
     return knex.schema.alterTable('person', (table) => {
-        table.integer('location_id')
-        table.foreign('location_id').references('location.id')
+        table.integer('location_id').notNullable();
+        table.foreign('location_id').references('location.id');
     })
 };
 
