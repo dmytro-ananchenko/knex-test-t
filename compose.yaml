@@ -1,0 +1,54 @@
+version: "3"
+
+services:
+  # Database
+  db:
+    platform: linux/x86_64
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - $DB_LOCAL_PORT:$DB_DOCKER_PORT
+    environment:
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+    networks:
+      - knex-net
+
+  # pgadmin
+  pgdmin:
+    depends_on:
+      - db
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    ports:
+      - $PGADMIN_LOCAL_PORT:$PGADMIN_DOCKER_PORT
+    environment:
+      PGADMIN_DEFAULT_EMAIL: $DB_USER_MAIL
+      PGADMIN_DEFAULT_PASSWORD: $DB_PASSWORD
+    networks:
+      - knex-net
+
+  # app:
+  #   depends_on:
+  #     - db
+  #   build: ./knexjs-tutorial/
+  #   restart: unless-stopped
+  #   # env_file: knexjs-tutorial/.env
+  #   ports:
+  #     - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+  #   environment:
+  #     DB_HOST: db
+  #     DB_USER: $DB_USER
+  #     DB_PASSWORD: $DB_PASSWORD
+  #     DB_NAME: $DB_NAME
+  #     DB_PORT: $DB_DOCKER_PORT
+  #   stdin_open: true
+  #   tty: true
+  #   networks:
+  #     - knex-net
+  #   volumes:
+  #     - .:/knex-tutorial
+  #   # command: npm run dev
+
+networks:
+  knex-net:
